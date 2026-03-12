@@ -6,6 +6,19 @@ Run with:
 """
 from __future__ import annotations
 
+# Force UTF-8 for all file I/O before any other imports.
+# PYTHONUTF8=1 only takes effect when set before Python starts (via launch.bat
+# or the shell), but setting it here ensures subprocesses we spawn also inherit
+# it. The io reconfigure calls fix stdin/stdout for the current process.
+import os
+import sys
+
+os.environ.setdefault("PYTHONUTF8", "1")
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 import shutil
 import tempfile
 from dataclasses import dataclass
