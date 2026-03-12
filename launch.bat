@@ -2,6 +2,9 @@
 cd /d "%~dp0"
 title 视频摘要助手
 
+:: Force UTF-8 for all Python I/O (prevents charmap errors with Chinese text)
+set PYTHONUTF8=1
+
 :: Download fonts if missing
 python scripts\download_fonts.py
 

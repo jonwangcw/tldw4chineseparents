@@ -141,7 +141,7 @@ def _extract_audio_ffmpeg(video_path: Path, tmp: Path) -> Path:
         "-b:a", "128k",
         str(audio_path),
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     if result.returncode != 0 or not audio_path.exists():
         raise RuntimeError(f"音频提取失败:\n{result.stderr}")
     return audio_path
