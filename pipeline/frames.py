@@ -49,7 +49,7 @@ def _scene_detect(video: Path, out_dir: Path, threshold: float) -> list[Path]:
         "-q:v", "3",
         pattern,
     ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     # ffmpeg returns non-zero even on success sometimes; check file output
     frames = sorted(out_dir.glob(f"scene_{threshold:.2f}_*.jpg"))
     return frames
@@ -65,7 +65,7 @@ def _fps_fallback(video: Path, out_dir: Path) -> list[Path]:
         "-q:v", "3",
         pattern,
     ]
-    subprocess.run(cmd, capture_output=True, text=True)
+    subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
     return sorted(out_dir.glob("fallback_*.jpg"))
 
 

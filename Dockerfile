@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+# Force UTF-8 for all Python I/O
+ENV PYTHONUTF8=1
+
 WORKDIR /app
 
 # Install Python deps first (layer cache friendly)

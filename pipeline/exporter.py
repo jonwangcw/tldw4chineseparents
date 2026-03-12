@@ -109,7 +109,7 @@ def _check_fonts() -> None:
     try:
         import importlib.util, subprocess, sys
         script = Path(__file__).parent.parent / "scripts" / "download_fonts.py"
-        subprocess.run([sys.executable, str(script)], check=True)
+        subprocess.run([sys.executable, str(script)], check=True, encoding="utf-8")
     except Exception:
         pass
     missing = [str(f) for f in (_FONT_REGULAR, _FONT_BOLD) if not f.exists()]
